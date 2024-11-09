@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Ask BRAIN</title>
+  <link rel="icon" href="./static/icg.png" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <style>
+    /* Define the font face */
+    @font-face {
+      font-family: 'Rajdhani';
+      src: url('/static/css/font/Rajdhani-Bold.ttf') format('truetype');
+      src: url('/static/css/font/Rajdhani-Light.ttf') format('truetype');
+      src: url('/static/css/font/Rajdhani-Medium.ttf') format('truetype');
+      src: url('/static/css/font/Rajdhani-Regular.ttf') format('truetype');
+      src: url('/static/css/font/Rajdhani-SemiBold.ttf') format('truetype');
+      src: url('/static/css/font/workbench/Workbench-Regular-VariableFont_BLED\,SCAN.ttf') format('truetype');
+      src: url('/static/css/font/workbench/static/Workbench-Regular.ttf') format('truetype');
+    }
+
+    .heading-BRAIN {
+      color: #210342;
+      font-size: 50px;
+      font-family: 'Rajdhani', sans-serif; 
+    }
+
+    body {
+      background: url('./static/login-bg1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 650px;
+      height: 600px;
+      padding: 20px;
+      background: rgba(195, 188, 240, 0.9);
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+
+    input[type="submit"] {
+      background: #5475f4;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      padding: 10px;
+    }
+
+    .login-logo {
+      height: 70px;
+    }
+
+    .login-logo1 {
+      height: 30px
+    }
+
+    .login-logo2 {
+      height: 90px
+    }
+
+    .login-logo3 {
+      height: 100px
+    }
+
+    /* Define keyframes for the animation */
+    @keyframes moveRight {
+      0% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(20px);
+      }
+      20.01% {
+        opacity: 0;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Apply the animation to the image */
+    .animate-image {
+      animation: moveRight 2s linear infinite;
+    }
+
+    /* Define keyframes for enlarging the icg2.png image */
+    @keyframes enlarge {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.20);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Apply the animation to the icg2.png image */
+    .enlarge-image {
+      animation: enlarge 5s linear infinite;
+    }
+
+    /* Center the chat-para vertically and horizontally */
+    .outer-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-para {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typewriter 10s steps(30) infinite;
+    }
+
+    .chat-para::before {
+      content: "|";
+      animation: blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink-caret {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: white;
+      }
+    }
+
+    /* Custom CSS to change submit button text color to red */
+    .btn-submit {
+      background-color: #8244d5 !important;
+      color: white !important;
+    }
+
+    /* Custom CSS to change submit button text color to red */
+    .btn-submit:hover {
+      background-color: #9a7ee4 !important;
+      color: white !important;
+      /* border: 1px solid #8244d5 !important; */
+    }
+
+    .form-control {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+    }
+
+    .btn-submit {
+      background-color: #8244d5 !important;
+      color: white !important;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .container2{
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .sidebar{
+      position: fixed;
+      top: 0;
+      right: -350px;
+      width: 350px;
+      height: 100%;
+      background-color: rgba(244, 244, 244, 0.7);
+      transition: right 0.3s ease;
+      z-index: 999;
+      padding: 20px;
+      display: flex;
+      color: black;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .close-button{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    .toggle-sidebar{
+      position: fixed;
+      top: 10%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: #561c24;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 10px;
+      text-transform: uppercase;
+      transition: transform 0.1s;
+      box-shadow: 0px 4px 0px 0px;
+    }
+
+    .toogle-sidebar:hover{
+      box-shadow: 0px 2px 0px 0px #361013;
+    }
+
+    .sidebar-hidden{
+      overflow: hidden;
+    }
+
+    .sidebar-img{
+      width: 30px;
+      margin-bottom: 20px;
+      position: relative;
+      right: 150px;
+      bottom: 10px;
+    }
+
+    #likeSection p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    #likeSection{
+      margin-top: 20px;
+    }
+
+    #likeButton {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #likeButton img {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    #likeButton.liked img{
+      transform: scale(1.2);
+    }
+
+    #likeCount {
+      margin-left: 5px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .suvimage{
+      width: 200px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container2">
+    <div class="sidebar" id="sidebar">
+      <div class="contact-details">
+        <img src="/static/close.png" onclick="toggleSidebar()" class="close-button" style="width: 30px; height: 30px;" alt="">
+      <img src="/static/icg2.png" alt="" class="sidebar-img">
+      <h2 style="font-size: 22px; margin-top: -15px;">Developer Details</h2>
+      <img src="/static/akki.jpg" style="width: 80px; border-radius: 50%;" alt="">
+      <p style="margin-top: 15px;"><b>N Sai Akhil <br> U/Nvk(R) <br> 14854-P <br>IT Section, Bureau Of Naviks</b> </p>
+    </div>
+    <hr style="width: 250px; border: 1px solid black;">
+
+    <h3 style="font-size: 25px;">Helpdesk</h3> <br>
+    <img style="width: 55px; margin-bottom: 20px; margin-top: -20px;" src="/static/telegif.gif" alt="">
+
+
+    <div class="email" style="display: flex; margin-left: -20px;">
+      <p><b>Telephone: </b>022-27496736</p>
+
+    </div>
+    <p><b>Sivam Intercom: </b>4501</p>
+    <div class="email" style="display: flex; ">
+      <img style="width: 15px; height: 15px; margin-top: 5px; margin-right: 5px;" src="/static/email.gif" alt="">
+      <p><b>Email id:</b> buvik@indiancoastguard.nic.in</p>
+    </div>
+
+
+    <p style="margin-top: auto; margin-bottom: 20px;"><b>Bureau Of Naviks <br> ICGS Panvel</b></p>
+    
+  <p>Version:<b> 1.0.0</b></p>
+  <div id="likeSection" style="display: flex;">
+    <p>Send <button id="likeButton" onclick="likePage()">
+      <img src="./static/like.png" alt="" width="30px" style="position: relative; bottom: 5px;"> to the Developer</p>
+    
+    </button>
+    
+  </div>
+
+    </div>
+  </div>
+
+  <script>
+    function likePage(){
+      const likeButton = document.getElementById('likeButton');
+      const likeCount = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem('likeCount')) || 0;
+
+      if (likeButton.classList.contains('liked')) {
+        likeButton.classList.remove('liked');
+        count--;
+      } else {
+        likeButton.classList.add('liked');
+        count++;
+      }
+      localStorage.setItem('likeCount', count);
+      likeCount.textContent = count;
+    }
+
+      function initializeLikeCount(){
+        const likeCount = document.getElementById('likeCount');
+
+        let count = parseInt(localStorage.getItem('likeCount')) || 0;
+        likeCount.textContent = count;
+      }
+
+      document.addEventListener("DOMContentLoaded", initializeLikeCount);
+
+    function toggleSidebar(){
+      var sidebar = document.getElementById('sidebar');
+      var container = document.querySelector('.container2');
+      if (sidebar.style.right === '0px') {
+        sidebar.style.right = '-350px';
+        container.classList.add('sidebar-hidden');
+      } else{
+        sidebar.style.right = '0px';
+        container.classList.remove('sidebar-hidden');
+      }
+    }
+  </script>
+  <div class="container">
+    <div class="login-box">
+      <img class="suvimage" src="/static/suv.png" alt="">
+      <!-- <h1 class="heading-BRAIN"> <span style="font-size: 40px; ">B</span>.<span style="font-size: 40px;">R</span>.<span style="color: white;">A</span><span style="color: white; ">.I</span>.<span style="font-size: 40px;">N</span></h1> -->
+      <div class="outer-container">
+        <p class="chat-para"><b>Initializing Artificial Intelligence...</b></p>
+      </div>
+
+      <div class="flex-column-centered" style="margin-bottom: 10px">
+        <img src="./static/AI_brain.png" alt="Company logo" class="login-logo">
+        <img src="./static/arrow.png" alt="Company logo" class="login-logo1 animate-image">
+        <img src="./static/icg2.png" alt="Company logo" id="icg2" class="login-logo2">
+      </div>
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <form method="post" action="{{ url_for('login') }}">
+        <label for="username" style="text-align: center;" class="visually-hidden">Username:</label>
+        <input type="text" name="username" class="form-control" style="border-radius: 20px; width: 400px;" placeholder="Username" required>
+        <label for="password" class="visually-hidden">Password:</label>
+        <input type="password" name="password" class="form-control" style="border-radius: 20px; width: 400px;" placeholder="Password" required>
+        <input type="submit" value="Login" class="btn btn-primary btn-submit mt-3">
+      </form> <br>
+      <p>*Now with the <b>Dictionary</b> and <b>Translations</b> to Hindi</p>
+      <div style="display: flex; margin-right: 150px;">
+      <button id="playVideoBtn" class="btn-submit tut-hover" style="margin-top: 10px; position: relative; background-color: #4c9cf8 !important; top: 5px; height: 40px; padding: 5px; ">Tutorial Video</button>
+      <a href="{{ url_for('dictionary') }}" class="btn btn-primary mt-3 dict_class btn-submit dict-submit-btn" style="background-color: #10bba1 !important; border: 1px solid white !important; position: relative; left: 90px !important;"><b>Dictionary</b></a>
+      <button class="btn-submit tut-hover" style="font-size: 15px; padding: 5px; height: 50px; margin-top: 10px; background-color: #4c9cf8 !important; position: relative; left: 150px;" onclick="toggleSidebar()">BRAIN - Help Desk</button>
+    
+    </div>
+    </div>
+  </div>
+
+  <!-- <p style="text-align: right; position: fixed; bottom: 10px; right: 10px; color: #fff; font-family: cursive; font-size: 15px;">
+    {% if username %}
+    {% if visitor_count is defined %}
+    Visitor Count for {{ username|upper }} section: <span style="opacity: 0;">0{{ visitor_count }}</span> Nos
+    {% endif %}
+    {% endif %} <br>
+    &copy; Designed and Developed By <b><u>N Sai Akhil, U/Nvk(R)<br> IT Section, Bureau Of Naviks</u></b></span>
+  </p> -->
+  <iframe height="315" width="500" src="/static/brain-muted.mp4" frameborder="0" allowfullscreen style="position: fixed; bottom: 10px; left: 15%; transform: translateX(-50%); display: none;" id="videoIframe"></iframe>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      function playVideo(){
+        var iframe = document.getElementById('videoIframe');
+        iframe.style.display = 'block';
+        iframe.src = iframe.src + "?autoplay=1";
+      }
+
+      function hideVideo(){
+        var iframe = document.getElementById('videoIframe');
+        iframe.style.display = 'none';
+        iframe.src = iframe.src.replace("?autoplay=1", "");
+      }
+
+      document.getElementById('playVideoBtn').addEventListener('click', function (event) {
+        event.preventDefault();
+        if (document.getElementById('videoIframe').style.display === 'block') {
+          hideVideo();
+        } else {
+          playVideo();
+        }
+      });
+
+      document.body.addEventListener('click', function (event) {
+        if (event.target.id !== 'playVideoBtn' && event.target.id !== 'videoIframe') {
+          hideVideo();
+        }
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the elements
+        const countValue = document.getElementById('countValue');
+
+        // Function to fade in/out the element with a quick transition
+        function fadeInOut(element, duration) {
+            let opacity = 0.5;
+            const interval = 500; // milliseconds
+
+            function updateOpacity() {
+                opacity = 1.5 - opacity;
+                element.style.opacity = opacity;
+            }
+
+            const fadeInterval = setInterval(updateOpacity, interval);
+
+            // Set a timeout to stop the fading after the specified duration
+            setTimeout(function () {
+                clearInterval(fadeInterval);
+            }, duration);
+        }
+
+        // Call the fadeInOut function with a duration (in milliseconds)
+        fadeInOut(countValue, 500); // Adjust the duration as needed
+    });
+</script>
+
+
+  
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const backgrounds = ['./static/login-bg1.jpg', './static/login-bg2.jpg', './static/login-bg3.jpg', './static/login-bg4.jpg'];
+
+      // Function to set a random background image
+      function setRandomBackground() {
+        const randomIndex = Math.floor(Math.random() * backgrounds.length);
+        document.body.style.backgroundImage = `url('${backgrounds[randomIndex]}')`;
+      }
+
+      // Call the function to set a random background when the page loads
+      setRandomBackground();
+
+      // Add this function to set the background color based on the current background image
+      function setBackgroundColor() {
+        const body = document.body;
+        const backgroundImage = getComputedStyle(body).backgroundImage;
+        let backgroundColor = 'rgba(195, 188, 240, 0.9)'; // Default color
+
+        if (backgroundImage.includes('login-bg1.jpg')) {
+          backgroundColor = 'rgba(255, 195, 122, 0.8)'; // Set the color for the blue background
+        } else if (backgroundImage.includes('login-bg2.jpg')) {
+          backgroundColor = 'rgba(195, 188, 240, 0.8)'; // Set the color for the green background
+        } else if (backgroundImage.includes('login-bg3.jpg')) {
+          backgroundColor = 'rgba(174, 222, 244, 0.8)'; // Set the color for the green background
+        } else if (backgroundImage.includes('login-bg4.jpg')) {
+          backgroundColor = 'rgb(40, 80, 144, 0.8)'; // Set the color for the green background
+        }
+
+        // Apply the background color to the box
+        document.querySelector('.login-box').style.background = backgroundColor;
+      }
+
+      // Call the function to set the background color of the box based on the current background image
+      setBackgroundColor();
+    });
+  </script>
+
+  <!-- Bootstrap JavaScript and Popper.js scripts -->
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

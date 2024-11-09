@@ -1,0 +1,134 @@
+body {
+    background: linear-gradient(to bottom, #ffffff, #3498db);
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .loader{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #fcff5f;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%{
+      transform: scale(0.8);
+      box-shadow: 0 0 0 0 rgba(249, 251, 127, 0.982);
+    }
+    50%{
+      transform: scale(1.2);
+      box-shadow: 0 0 0 20px rgba(52, 152, 219, 0);
+    }
+    100%{
+      transform: scale(0.8);
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+    }
+    
+  }
+  .background-container {
+    /* Remove existing background styles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fff;
+    overflow: auto;
+  }
+
+  .chat-container {
+    max-width: 800px;
+    margin: 5% auto;
+    padding: 20px;
+    background: url("") center center/cover; /* Set background image */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(
+      64,
+      68,
+      79,
+      0.5
+    ); /* Set background color with opacity */
+  }
+
+  .accordion {
+    margin-top: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #555;
+  }
+
+  .accordion-button {
+    color: white;
+    background-color: #555;
+  }
+
+  .accordion-body {
+    color: white;
+  }
+
+  .chat-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 80px;
+    resize: none;
+    border: 2px solid #4caf50;
+    border-radius: 5px;
+    padding: 10px;
+    color: #333;
+    background-color: #f9f9f9;
+    width: 100%;
+  }
+
+  .chat-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .chat-button:hover {
+    background-color: #3d8b40;
+  }
+
+  .chat-response {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 100px;
+    margin-top: 20px;
+    color: #fff;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }

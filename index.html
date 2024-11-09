@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN Search Engine</title>
+    <link rel="icon" href="./static/icg.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+    <style>
+            /* Define the font face */
+    @font-face {
+      font-family: 'Rajdhani';
+      src: url('/static/css/font/Rajdhani-Bold.ttf') format('truetype'); /* Adjust the path to your font file */
+      src: url('/static/css/font/Rajdhani-Light.ttf') format('truetype'); /* Adjust the path to your font file */
+      src: url('/static/css/font/Rajdhani-Medium.ttf') format('truetype'); /* Adjust the path to your font file */
+      src: url('/static/css/font/Rajdhani-Regular.ttf') format('truetype'); /* Adjust the path to your font file */
+      src: url('/static/css/font/Rajdhani-SemiBold.ttf') format('truetype'); /* Adjust the path to your font file */
+      src: url('/static/css/font/workbench/Workbench-Regular-VariableFont_BLED\,SCAN.ttf') format('truetype'); /* Adjust the path to your font file */
+      src: url('/static/css/font/workbench/static/Workbench-Regular.ttf') format('truetype'); /* Adjust the path to your font file */
+
+    }
+
+    .heading-BRAIN{
+      font-family: 'Rajdhani', sans-serif;
+      color: #210342; 
+      font-size: 50px;
+    }
+
+    .suvimg{
+        width: 200px;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="loader" class="loader-container">
+        <div class="pulsating-image-container">
+            <img src="/static/loader.png" alt="Loading-image" class="pulsating-image">
+        </div>
+    </div>    
+    <div class="preloader">
+        <div class="loading-image-container">
+            <img src="/static/icg2.png" alt="Loading Image" class="loading-image">
+        </div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+    <div class="background-container">
+        <img src="./static/cogu-bg2.png" alt="Left Image" style="width: 22%; height: 60%; position: fixed; top: 220px; left: 20px;">
+        <div class="container chat-container">
+            <!-- Existing code in index.html -->
+            <div style="text-align: left; color: #fff; margin-bottom: 10px;">
+                {% if username %}
+                    Welcome: <b> {{ username|upper }} section </b>
+                {% endif %}
+            </div>
+            <div style="position: absolute; top: 10px; right: 10px;">
+                {% if username %}
+                <a href="{{ url_for('logout') }}" class="btn btn-info"><b>Logout</b></a>
+                {% endif %}
+            </div>
+            <div class="row align-items-center justify-content-center"> <!-- Updated row with align-items-center and justify-content-center classes -->
+                <div class="col-md-6 text-center">
+                    <img class="suvimg" src="/static/suv.png" alt="">
+                </div>
+          <p class="chat-para" style="margin-top: 1px !important;"><b>Initializing Artificial Intelligence</b></p>
+
+            </div>
+        <div class="accordion" id="appDescriptionAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="descriptionHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDescription" aria-expanded="true" aria-controls="collapseDescription">
+                        Topics covered in the brain and Instructions: 
+                    </button>
+                </h2>
+                <div id="collapseDescription" class="accordion-collapse collapse" aria-labelledby="descriptionHeading" data-bs-parent="#appDescriptionAccordion">
+                    <div class="accordion-body text-dark">
+                        {% if username %}
+                    {% if username == 'admin' %}
+                        <b>ADMIN Section: </b>Sea Service Extract, Discharge of UT EPs and EFs, Discontinue of SB, Issuance of IC_NOC, Procedure for applying Officer, NOC for proceeding Abroad, NOC Job outside ICG, Discharge of EFs, Representation of Legal Modes, Vigilance Clearance, VR_Discharge guidelines, Procedure for VR resignation, Buvik Webpage, Logistic - Victualling store manual, Specifications of CG Uniforms, Ship Building Manual, Survey & Maintenance Manual for Steel Hull ships, Maintenance Manual, CG Drills, Parade & Ceremonials, CG Explosives Manual, Ships Operating Standards, Guidelines on Station Keeping by Distance Line, Buvik Manual. </br> </br>
+                        <b>** Hi, I'm COGU, your A-I assistant. Always ask me the queries regarding ADMIN section from the above stored PDFs, so that I can provide you the best answer you require.**</b> </br>
+                        Example question: <b>"what is sea service extract and who are not eligible to take sea service extract?"</b></br>
+                    {% elif username == 'record' %}
+                        <b>RECORD Section: </b>NOC for higher studies, Disciplinary proceedings post dismissal CGHQ Policy, Registration Of Marriage, Nomination - NGIS member, WRILL Policy letter, Award of punishment for absent without leave. </br> </br>
+                        <b>** Hi, I'm COGU, your A-I assistant. Always ask me the queries regarding RECORD section from the above stored PDFs, so that I can provide you the best answer you require.**</b> </br>
+                        Example question: <b>"what are the guidelines discussed in NOC for Higher Studies?"</b></br>
+                    {% elif username == 'manpower' %}
+                        <b>MANPOWER Section: </b>Reservation for SC, ST, OBC in posts and services in Govt. jobs, Relaxation in upper age limit, Reservation for persons with benchmark disabilities, Issue of Compendium of Instructions, FAQs Domicile caste certificate, FAQs on reservation to EWS. </br> </br>
+                        <b>** Hi, I'm COGU, your A-I assistant. Always ask me the queries regarding MAN POWER section from the above stored PDFs, so that I can provide you the best answer you require.**</b> </br>
+                        Example question: <b>"what is the reservation for SC, ST and OBC in posts and services in Govt. Job?"</b></br>
+                    {% elif username == 'training' %}
+                        <b>TRAINING Section: </b>Allotment of Personal Number, Attachment of trainee yantrik to BMU, Grant leave for NVK (DB), Medical fitness for course, promotion, Minimising unwillingness for course, Nomination of EP in LMC S3A2, Non-swimmers, Unwillingness for the course </br> </br>
+                        <b>** Hi, I'm COGU, your A-I assistant. Always ask me the queries regarding TRAINING section from the above stored PDFs, so that I can provide you the best answer you require.**</b> </br>
+                        Example question: <b>"How many leaves does Navik (DB) will be granted after their Professional training?"</b></br>
+                    {% elif username == 'dictionary' %}
+                        Thesaurus Dictionary is added in the brain, and COGU can speak over 15 languages (English, Hindi, Japanese, Chinese, Mexican, Italian, Spanish, Arabic, Urdu, Portugese, French, Russian, German, Indonesian, Dutch.) and translates the meaning you ask for. </br>
+                        <b>** Hi, I'm COGU, your A-I assistant. I can behave like a Dictionary and a Translator for you.**</b> </br>
+                        Example question: <b>"What is the meaning of Success, translate that in Hindi language?"</b></br>
+                    {% elif username == 'promotion' %}
+                        <b>PROMOTION Section:</b> Sealed Cover Policy ,  Consolidated instructions on DPC,  Consolidated instructions on DPC, Penalties on promoption OMs,vigilance clearance for promotion, Lesser standarad of evaluation - Reservation, Lesser standarad of evaluation - Resrvation, Modified Sealed cover OMs, Consolidated Guidelines MACP, SLPC on reservation matter, Guidelines on Seniority of central govt, Non Swimmer, Instructions on DPC, Applicability on Sealed cover, Effect of penalties on promotions, Sealed Cover, Vigiliance clearance, lesser standard of evaluation, Treatment of SC_ST candidates, Guidelines of MACP, SLCP on reservation matters, Medical Fitness for promotion after reduction in rank, Delinking of Medical for confirmation, lowering of threshold SC_ST candidates, VG Conduct for MACP EF, Constitution of DPC, MACP scheme for CG EFs, Weightage for outstanding sportsmen, zone of consideration, MACP scheme for CG Officers and EPs.</br> </br>
+                        <b>** Hi, I'm COGU, your A-I assistant. Always ask me the queries regarding PROMOTION section from the above stored PDFs, so that I can provide you the best answer you require.**</b> </br>
+                        Example question: <b>"What are the points mentioned in Sealed Cover policy letter?"</b></br>
+                    </br> </br>
+                    {% else %}
+                        The topics covered in the brain are: </br> </br>
+                        <b>COMMON Section: </b>Common content visible to all users. </br> </br>
+                    {% endif %}
+                {% endif %}
+                       
+                    </div>
+                    <button id="closeAccordionBtn" class="close-accordion-btn" onclick="closeAccordion()">Close Accordion</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <textarea id="userInput" class="form-control chat-input" placeholder="Type your query here..."></textarea>
+                <button id="submitBtn" class="btn chat-button mx-auto d-block button-submit" onclick="handleSubmit()">Submit</button>
+                <div id="response" class="chat-response">
+                </div>
+                <div class="pdf_viewer">
+                    <input type="text" id="documentName" placeholder="click on Display PDF button">
+                    <button class="display-button" onclick="displayDocument()">Display PDF</button>
+                    <div id="pdfViewer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="./static/cogu-bg.png" alt="Right Image" style="width: 20%; height: auto; position: fixed; top: 200px; right: 20px;">
+
+</div>
+
+<p style="text-align: right; position: fixed; bottom: 10px; right: 10px; color: #fff; font-family: cursive; font-size: 15px;">
+    {% if username %}
+        {% if visitor_count is defined %}
+            Visitor Count for {{ username|upper }} section: <span id="countValue" style="opacity: 0;">0{{ visitor_count }}</span>
+        {% endif %}
+    {% endif %} </br>
+    
+</p>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the elements
+        const countValue = document.getElementById('countValue');
+
+        // Function to fade in/out the element with a quick transition
+        function fadeInOut(element, duration) {
+            let opacity = 0.5;
+            const interval = 500; // milliseconds
+
+            function updateOpacity() {
+                opacity = 1.5 - opacity;
+                element.style.opacity = opacity;
+            }
+
+            // Run the updateOpacity function in intervals
+            setInterval(updateOpacity, interval);
+
+            // Set a timeout to stop the fading after the specified duration
+            setTimeout(function () {
+                clearInterval(fadeInterval);
+            }, duration);
+        }
+
+        // Call the fadeInOut function with a duration (in milliseconds)
+        fadeInOut(countValue, 500); // Adjust the duration as needed
+    });
+</script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
